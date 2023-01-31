@@ -2,17 +2,17 @@
 Function Get-MsrcCveTitle {
 	<#
 		.SYNOPSIS
-			Helper function to get CVETitle of a specified CVE number
+		Helper function to get CVETitle of a specified CVE number
 	 
 		.DESCRIPTION
-			Helper function to get CVETitle of a specified CVE number
+		Helper function to get CVETitle of a specified CVE number
 	 
 		.PARAMETER Vulnerability
 	 
 		.PARAMETER ProductTree
 	 
 		.EXAMPLE
-			(Get-MsrcCveTitle -Vulnerability $ID.Vulnerability -ProductTree $id.ProductTree -ProductFilter $ProductType -CVEFilter $($_.CVE)).CVETitle
+		(Get-MsrcCveTitle -Vulnerability $ID.Vulnerability -ProductTree $id.ProductTree -ProductFilter $ProductType -CVEFilter $($_.CVE)).CVETitle
 	 
 	#>
 	[CmdletBinding()]
@@ -53,10 +53,10 @@ Function Get-MsrcCveTitle {
 Function Get-ActualCVEsByProduct {
 	<#
 		.SYNOPSIS
-			Get CVEs from a specified year-month (e.g.: 2023-Jan) of a given product (e.g.: Windows Server 2022)
+		Get CVEs from a specified year-month (e.g.: 2023-Jan) of a given product (e.g.: Windows Server 2022)
 	 
 		.DESCRIPTION
-		   Enumerates all CVEs for a specified product and year-month combination
+		Enumerates all CVEs for a specified product and year-month combination
 	 
 		.PARAMETER ProductTitle
 	 
@@ -65,13 +65,13 @@ Function Get-ActualCVEsByProduct {
 		.PARAMETER OutputStyle
 	 
 		.EXAMPLE
-			Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016*" -OutputStyle HTML
+		Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016*" -OutputStyle HTML
 	 
 		.EXAMPLE
-			Get-ActualCVEsByProduct -ProductTitle "Microsoft Edge*" -OutputStyle GridView
+		Get-ActualCVEsByProduct -ProductTitle "Microsoft Edge*" -OutputStyle GridView
 
 		.EXAMPLE
-			Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016*"  -Date '2022-Dec' -OutputStyle GridView
+		Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016*"  -Date '2022-Dec' -OutputStyle GridView
 	#>
 	[CmdletBinding()]
 	Param (
