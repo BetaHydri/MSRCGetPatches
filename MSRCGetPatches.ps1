@@ -189,5 +189,5 @@ Function Get-ActualCVEsByProduct {
 	End {}
 }
 
-Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016" -OutputStyle HTML
+Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016" -OutputStyle GridView
 #Get-ActualCVEsByProduct -ProductTitle "*" -OutputStyle HTML
