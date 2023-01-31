@@ -5,7 +5,7 @@ Function Get-MsrcCveTitle {
 			Helper function to get CVETitle of a specified CVE number
 	 
 		.DESCRIPTION
-		   Helper function to get CVETitle of a specified CVE number
+			Helper function to get CVETitle of a specified CVE number
 	 
 		.PARAMETER Vulnerability
 	 
