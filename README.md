@@ -20,10 +20,8 @@ Samples:
 3. `Get-ActualCVEsByProduct -ProductTitle "Microsoft Edge*" -OutputStyle GridView`
 4. `Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016*"  -Date '2022-Dec' -OutputStyle GridView`
 
-Output:
+Output sample 1.:
 
-|<sub><sup>CVE</sub></sup>	|<sub><sup>CVE-Title</sub></sup>	|<sub><sup>ProductName</sub></sup>	|<sub><sup>Severity</sub></sup>	|<sub><sup>Impact</sub></sup>	|<sub><sup>FixedBuild</sub></sup>	|<sub><sup>KB-ID</sub></sup>	|<sub><sup>KBType</sub></sup>	|<sub><sup>KBDownloadUrl</sub></sup>|
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-|<sub><sup>CVE-2023-21535</sub></sup>	|<sub><sup>Windows Secure Socket Tunneling Protocol (SSTP) Remote Code Execution Vulnerability</sub></sup>	|<sub><sup>Windows Server 2016</sub></sup>	|<sub><sup>Critical</sub></sup>	|<sub><sup>Remote Code Execution</sub></sup> |	<sub><sup>10.0.14393.5648</sub></sup>	|<sub><sup>5022289</sub></sup>	|<sub><sup>Security Update</sub></sup>	|<sub><sup>https://catalog.update.microsoft.com/v7/site/Search.aspx?q=KB5022289</sub></sup>|
-|<sub><sup>CVE-2023-21543</sub></sup>	|<sub><sup>Windows Layer 2 Tunneling Protocol (L2TP) Remote Code Execution Vulnerability</sub></sup>|<sub><sup>Windows Server 2016</sub></sup>	|<sub><sup>Critical</sub></sup>	|<sub><sup>Remote Code Execution</sub></sup>	|<sub><sup>10.0.14393.5648</sub></sup>	|<sub><sup>5022289</sub></sup>	|<sub><sup>Security Update</sub></sup>	|<sub><sup>https://catalog.update.microsoft.com/v7/site/Search.aspx?q=KB5022289</sub></sup>|
-|<sub><sup>CVE-2023-21546</sub></sup>	|<sub><sup>Windows Layer 2 Tunneling Protocol (L2TP) Remote Code Execution Vulnerability</sub></sup>	|<sub><sup>Windows Server 2016</sub></sup>	|<sub><sup>Critical</sub></sup>	|<sub><sup>Remote Code Execution</sub></sup>	|<sub><sup>10.0.14393.5648</sub></sup>	|<sub><sup>5022289</sub></sup>	|<sub><sup>Security Update</sub></sup>	|<sub><sup>https://catalog.update.microsoft.com/v7/site/Search.aspx?q=KB5022289</sub></sup> |
+![HTML](https://github.com/BetaHydri/MSRCGetPatches/blob/master/HTML.jpg "HTML Output")<br />
+
+![GridView](https://github.com/BetaHydri/MSRCGetPatches/blob/master/GridView.jpg "GridView Output")
