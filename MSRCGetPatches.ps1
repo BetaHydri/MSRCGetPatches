@@ -178,7 +178,7 @@ Function Get-ActualCVEsByProduct {
 						Invoke-Item -Path $HTMLReport
 					}
 					else {
-						Write-Warning "No CVEs on $($Date.ToString("yyyy-MMM")) and for $ProductType was found!"
+						Write-Warning "No CVEs on $($Date.ToString("yyyy-MMM")) and for $ProductType were found!"
 					}
 				}
 				'GridView'	{
@@ -186,7 +186,7 @@ Function Get-ActualCVEsByProduct {
 						$ProductNameArray  | Sort-Object -Property Severity, CVE  | Out-GridView -Title "$Title"
 					}
 					else {
-						Write-Warning "No CVEs on $($Date.ToString("yyyy-MMM")) and for $ProductType was found!"
+						Write-Warning "No CVEs on $($Date.ToString("yyyy-MMM")) and for $ProductType were found!"
 					}
 				}
 				'Console' {
@@ -195,7 +195,7 @@ Function Get-ActualCVEsByProduct {
 						$ProductNameArray  | Sort-Object -Property Severity, CVE
 					}
 					else {
-						Write-Warning "No CVEs on $($Date.ToString("yyyy-MMM")) and for $ProductType was found!"
+						Write-Warning "No CVEs on $($Date.ToString("yyyy-MMM")) and for $ProductType were found!"
 					}
 				}
 			}
