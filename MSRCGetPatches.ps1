@@ -178,7 +178,7 @@ Function Get-ActualCVEsByProduct {
 						Invoke-Item -Path $HTMLReport
 					}
 					else {
-						Write-Warning "No CVEs for ($($Date.ToString("yyyy-MMM"))) and $ProductType was found!"
+						Write-Warning "No CVEs on $($Date.ToString("yyyy-MMM")) and for $ProductType was found!"
 					}
 				}
 				'GridView'	{
@@ -186,7 +186,7 @@ Function Get-ActualCVEsByProduct {
 						$ProductNameArray  | Sort-Object -Property Severity, CVE  | Out-GridView -Title "$Title"
 					}
 					else {
-						Write-Warning "No CVEs for ($($Date.ToString("yyyy-MMM"))) and $ProductType was found!"
+						Write-Warning "No CVEs on $($Date.ToString("yyyy-MMM")) and for $ProductType was found!"
 					}
 				}
 				'Console' {
@@ -195,13 +195,13 @@ Function Get-ActualCVEsByProduct {
 						$ProductNameArray  | Sort-Object -Property Severity, CVE
 					}
 					else {
-						Write-Warning "No CVEs for ($($Date.ToString("yyyy-MMM"))) and $ProductType was found!"
+						Write-Warning "No CVEs on $($Date.ToString("yyyy-MMM")) and for $ProductType was found!"
 					}
 				}
 			}
 		}
 		catch [System.Management.Automation.ParameterBindingException] {
-			if ($error[0].Exception.Message -match "The argument ""($($Date.ToString("yyyy-MMM")))"" does not belong to the set") {
+			if ($error[0].Exception.Message -match "The argument ""$($Date.ToString("yyyy-MMM"))"" does not belong to the set") {
 				Write-Warning "There are no published CVEs for the selected date: $($Date.ToString("yyyy-MMM"))"
 			}
 			else { 
