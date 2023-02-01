@@ -72,6 +72,14 @@ Function Get-ActualCVEsByProduct {
 
 		.EXAMPLE
 		Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016*"  -Date '2022-Dec' -OutputStyle Console
+
+		.EXAMPLE
+		Get-ActualCVEsByProduct -ProductTitle "Windows 10 Version 22H2*"  -Date '2022-Dec' -OutputStyle Console | Format-Table
+
+		.EXAMPLE
+		Get-ActualCVEsByProduct -ProductTitle "Windows 10 for x64-based Systems"  -Date '12.2022' -OutputStyle Console | Format-Table
+
+
 	#>
 	[CmdletBinding()]
 	Param (
