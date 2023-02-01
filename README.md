@@ -11,6 +11,7 @@ PARAMETER ***ProductTitle*** (mandatory) <br />
 PARAMETER ***OutputStyle*** (mandatory)<br />
 * `HTML`
 * `GridView`
+# `Console`
 
 PARAMETER ***Date*** (optional)<br />
 * `2021-Jun`
@@ -20,7 +21,7 @@ Samples:
 
 1. `Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016*" -OutputStyle HTML`
 3. `Get-ActualCVEsByProduct -ProductTitle "Microsoft Edge*" -OutputStyle GridView`
-4. `Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016*"  -Date '2022-Dec' -OutputStyle GridView`
+4. `Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016*"  -Date '2022-Dec' -OutputStyle Console`
 
 Output sample 1.:
 
