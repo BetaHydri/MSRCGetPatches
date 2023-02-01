@@ -34,4 +34,6 @@ Output sample 1.:
 
 ![GridView](https://github.com/BetaHydri/MSRCGetPatches/blob/master/GridView.jpg "GridView Output")<br />
 
+Output sample 3.:
+
 ![GridView](https://github.com/BetaHydri/MSRCGetPatches/blob/master/Console.jpg "Console Output")
