@@ -14,6 +14,7 @@ PARAMETER ***OutputStyle*** (mandatory)<br />
 * `Console`
 
 PARAMETER ***Date*** (optional)<br />
+<sub>If omitted then actual year-month will be used!</sub>
 * `2021-Jun`
 * `2023-Jan`
 
