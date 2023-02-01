@@ -172,16 +172,31 @@ Function Get-ActualCVEsByProduct {
 			Switch ($OutputStyle) {
 			
 				'HTML'	{
-					$Report = $ProductNameArray | Sort-Object -Property Severity, CVE  | ConvertTo-Html
-					ConvertTo-Html -Title $Title -Head $Header -Body "$Css $Report" | Out-File $HTMLReport 
-					Invoke-Item -Path $HTMLReport
+					if ($ProductNameArray) {
+						$Report = $ProductNameArray | Sort-Object -Property Severity, CVE  | ConvertTo-Html
+						ConvertTo-Html -Title $Title -Head $Header -Body "$Css $Report" | Out-File $HTMLReport 
+						Invoke-Item -Path $HTMLReport
+					}
+					else {
+						Write-Warning "No CVEs for ($($Date.ToString("yyyy-MMM"))) and $ProductType was found!"
+					}
 				}
 				'GridView'	{
-					$ProductNameArray  | Sort-Object -Property Severity, CVE  | Out-GridView -Title "$Title"
+					if ($ProductNameArray) {
+						$ProductNameArray  | Sort-Object -Property Severity, CVE  | Out-GridView -Title "$Title"
+					}
+					else {
+						Write-Warning "No CVEs for ($($Date.ToString("yyyy-MMM"))) and $ProductType was found!"
+					}
 				}
 				'Console' {
-					Write-Host "$Title" -ForegroundColor Green
-					$ProductNameArray  | Sort-Object -Property Severity, CVE
+					if ($ProductNameArray) {
+						Write-Host "$Title" -ForegroundColor Green
+						$ProductNameArray  | Sort-Object -Property Severity, CVE
+					}
+					else {
+						Write-Warning "No CVEs for ($($Date.ToString("yyyy-MMM"))) and $ProductType was found!"
+					}
 				}
 			}
 		}
