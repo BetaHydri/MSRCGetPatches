@@ -11,7 +11,7 @@ PARAMETER ***ProductTitle*** (mandatory) <br />
 PARAMETER ***OutputStyle*** (mandatory)<br />
 * `HTML`
 * `GridView`
-# `Console`
+* `Console`
 
 PARAMETER ***Date*** (optional)<br />
 * `2021-Jun`
