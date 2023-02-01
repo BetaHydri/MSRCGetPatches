@@ -71,7 +71,7 @@ Function Get-ActualCVEsByProduct {
 		Get-ActualCVEsByProduct -ProductTitle "Microsoft Edge*" -OutputStyle GridView
 
 		.EXAMPLE
-		Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016*"  -Date '2022-Dec' -OutputStyle GridView
+		Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016*"  -Date '2022-Dec' -OutputStyle Console
 	#>
 	[CmdletBinding()]
 	Param (
@@ -82,7 +82,7 @@ Function Get-ActualCVEsByProduct {
 		[DateTime]$Date = (Get-Date -Format yyyy-MMM),
 
 		[Parameter(Mandatory, ValueFromPipelineByPropertyName)]
-		[ValidateSet("HTML", "GridView")]
+		[ValidateSet("HTML", "GridView", "Console")]
 		$OutputStyle
 	)
 	Begin {
@@ -179,7 +179,18 @@ Function Get-ActualCVEsByProduct {
 				'GridView'	{
 					$ProductNameArray  | Sort-Object -Property Severity, CVE  | Out-GridView -Title "$Title"
 				}
-			
+				'Console' {
+					Write-Host "$Title" -ForegroundColor Green
+					$ProductNameArray  | Sort-Object -Property Severity, CVE
+				}
+			}
+		}
+		catch [System.Management.Automation.ParameterBindingException] {
+			if ($error[0].Exception.Message -match "The argument ""$Date"" does not belong to the set") {
+				Write-Warning "There are no published CVEs for the selected date: $Date"
+			}
+			else { 
+				$error[0].Exception.Message
 			}
 		}
 		catch {
@@ -189,5 +200,6 @@ Function Get-ActualCVEsByProduct {
 	End {}
 }
 
-Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016" -OutputStyle GridView
-#Get-ActualCVEsByProduct -ProductTitle "*" -OutputStyle HTML
+### Sample calls
+#Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016" -OutputStyle "Console" -Date "2022-Dec"
+#Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016*" -OutputStyle HTML
