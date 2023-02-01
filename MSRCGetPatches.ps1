@@ -186,8 +186,8 @@ Function Get-ActualCVEsByProduct {
 			}
 		}
 		catch [System.Management.Automation.ParameterBindingException] {
-			if ($error[0].Exception.Message -match "The argument ""$Date"" does not belong to the set") {
-				Write-Warning "There are no published CVEs for the selected date: $Date"
+			if ($error[0].Exception.Message -match "The argument ""($($Date.ToString("yyyy-MMM")))"" does not belong to the set") {
+				Write-Warning "There are no published CVEs for the selected date: $($Date.ToString("yyyy-MMM"))"
 			}
 			else { 
 				$error[0].Exception.Message
@@ -203,3 +203,4 @@ Function Get-ActualCVEsByProduct {
 ### Sample calls
 #Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016" -OutputStyle "Console" -Date "2022-Dec"
 #Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016*" -OutputStyle HTML
+#Get-ActualCVEsByProduct -ProductTitle "Windows Server 2019" -OutputStyle Console
