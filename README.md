@@ -26,4 +26,6 @@ Output sample 1.:
 
 ![HTML](https://github.com/BetaHydri/MSRCGetPatches/blob/master/HTML.jpg "HTML Output")<br />
 
-![GridView](https://github.com/BetaHydri/MSRCGetPatches/blob/master/GridView.jpg "GridView Output")
+![GridView](https://github.com/BetaHydri/MSRCGetPatches/blob/master/GridView.jpg "GridView Output")<br />
+
+![GridView](https://github.com/BetaHydri/MSRCGetPatches/blob/master/Console.jpg "Console Output")
