@@ -17,7 +17,7 @@ PARAMETER ***Date*** (optional)<br />
 <sub>If not specified, the current year and month will be used!</sub>
 * `2021-Jun`
 * `2023-Jan`
-* `01.12.2022`
+* `03/01/2022`
 * `11.2022`
 
 Samples:
