@@ -93,17 +93,28 @@ Function Get-ActualCVEsByProduct {
 		[DateTime]$Date = (Get-Date -Format yyyy-MMM),
 
 		[Parameter(Mandatory, ValueFromPipelineByPropertyName)]
-		[ValidateSet("HTML", "GridView", "Console")]
+		[ValidateSet("HTML", "GridView", "Console", "Excel")]
 		$OutputStyle
 	)
 	Begin {
 		try {
 			### Install the module from the PowerShell Gallery
-			Install-Module -Name MsrcSecurityUpdates -Scope CurrentUser
-
+			if (-not (Get-Module MsrcSecurityUpdates -ListAvailable)) {
+				Install-Module MsrcSecurityUpdates -Repository PSGallery -SkipPublisherCheck -Scope CurrentUser -Force
+			}
 			### Load the module if PowerShell is at least version 5.1
 			if ($PSVersionTable.PSVersion -gt [version]'5.1') {
 				Import-Module -Name MsrcSecurityUpdates
+			}
+			else {
+				Write-Error "Your PoSH Version is $PSVersionTable.PSVersion you need at least version 5.1"
+				Exit
+			}
+			if ($OutputStyle -eq 'Excel') {
+				if (-not (Get-Module ImportExcel -ListAvailable)) {
+					Install-Module ImportExcel -Repository PSGallery -SkipPublisherCheck -Scope CurrentUser -Force
+				}
+				Import-Module -Name ImportExcel
 			}
 		}
 		catch {
@@ -209,6 +220,29 @@ Function Get-ActualCVEsByProduct {
 						Write-Warning "No CVEs on $($Date.ToString("yyyy-MMM")) and for $ProductType were found!"
 					}
 				}
+				'Excel' {
+					if ($ProductNameArray) {
+						
+						$excelsrcfile = "$env:USERPROFILE\Desktop\CVEs.xlsx"
+						if(Test-Path $excelsrcfile -PathType Leaf) {
+							Remove-Item -Path $excelsrcfile -Force
+						}
+						$excelTableName = "CVEs_$($Date.ToString("MMM_yyyy"))" 
+						$data = $ProductNameArray  | Sort-Object -Property Severity, CVE
+						$ConditionalText1 = New-ConditionalText -Text 'Critical' -BackgroundColor Red
+						$ConditionalText2 = New-ConditionalText -Text 'Important' -BackgroundColor Orange
+						$ConditionalText3 = New-ConditionalText -Text 'Moderate' -BackgroundColor Yellow
+						$ConditionalText4 = New-ConditionalText -Text 'Low' -BackgroundColor LightBlue
+						$pivot = @{Show = $true; AutoSize = $true; AutoFilter = $true; IncludePivotTable = $true; ConditionalText = @($ConditionalText1, $ConditionalText2, $ConditionalText3, $ConditionalText4) }
+						$pivot.PivotRows = 'Severity', 'CVE-Title', 'CVE'
+						$pivot.PivotColumns = 'KB-ID'
+						$pivot.PivotData = "Impact"
+						$data | Export-Excel -Path $excelsrcfile -TableName $excelTableName -Title $Title -PivotChartType PieExploded3D -ShowPercent @pivot
+					}
+					else {
+						Write-Warning "No CVEs on $($Date.ToString("yyyy-MMM")) and for $ProductType were found!"
+					}
+				}				
 			}
 		}
 		catch [System.Management.Automation.ParameterBindingException] {
@@ -227,6 +261,6 @@ Function Get-ActualCVEsByProduct {
 }
 
 ### Sample calls
-#Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016" -OutputStyle "Console" -Date "2022-Dec"
-#Get-ActualCVEsByProduct -ProductTitle "Microsoft SQL Server 2016*" -OutputStyle Console -Date 06.2022
+#Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016" -OutputStyle Excel -Date "2022-Dec"
+#Get-ActualCVEsByProduct -ProductTitle "Microsoft SQL Server 2016*" -OutputStyle Excel -Date 06.2022
 #Get-ActualCVEsByProduct -ProductTitle "Windows Server 2019" -OutputStyle Console
