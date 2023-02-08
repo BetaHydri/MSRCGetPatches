@@ -41,4 +41,10 @@ Output sample 1. as GridVIew:
 
 Output sample 3.:
 
-![GridView](https://github.com/BetaHydri/MSRCGetPatches/blob/master/Console.jpg "Console Output")
+![GridView](https://github.com/BetaHydri/MSRCGetPatches/blob/master/Console.jpg "Console Output")<br />
+
+Output sample 4.:
+
+![Excel](https://github.com/BetaHydri/MSRCGetPatches/blob/master/Excel1.jpg "Excel Table View")
+
+![Excel](https://github.com/BetaHydri/MSRCGetPatches/blob/master/ExcelPivotChart.jpg "Excel Pivot View")
