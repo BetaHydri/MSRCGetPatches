@@ -11,7 +11,7 @@ PARAMETER ***ProductTitle*** (mandatory) <br />
 PARAMETER ***OutputStyle*** (mandatory)<br />
 * `HTML`
 * `GridView`
-* `Excel`
+* `Excel` by using module ImportExcel from dfinke
 * `Console`
 
 PARAMETER ***Date*** (optional)<br />
