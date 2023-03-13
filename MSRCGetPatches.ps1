@@ -249,7 +249,7 @@ Function Get-ActualCVEsByProduct {
 						$pivot.PivotRows = 'Severity', 'CVE-Title', 'CVE', 'KBType', 'KB-ID'
 						$pivot.PivotColumns = 'ProductName'
 						$pivot.PivotData = "Impact"
-						$data | Export-Excel -Path $excelsrcfile -TableName $excelTableName -Title $Title -PivotChartType PieExploded3D -ShowPercent @pivot
+						$data | Export-Excel -Path $excelsrcfile -TableName $excelTableName -Title $Title -PivotChartType BarStacked -ShowPercent @pivot
 					}
 					else {
 						Write-Warning "No CVEs on $($Date.ToString("yyyy-MMM")) and for $ProductType were found!"
