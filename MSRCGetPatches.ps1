@@ -247,7 +247,7 @@ Function Get-ActualCVEsByProduct {
 						$ConditionalText4 = New-ConditionalText -Text 'Low' -BackgroundColor LightBlue
 						$ConditionalText = @($ConditionalText1, $ConditionalText2, $ConditionalText3, $ConditionalText4)
 						$PivotTableDef = New-PivotTableDefinition -PivotTableName "Pivot_$excelTableName" -PivotRows 'Severity', 'Impact', 'CVE_Title', 'CVE', 'KBType', 'KB_ID' -PivotColumns 'ProductName' -PivotData @{Severity = 'Count' } -PivotTableStyle Medium8 -Activate -ChartType BarClustered -ChartTitle $($excelTableName.Replace('_', ' ')) -ChartHeight 650 -ChartWidth 1200
-						$data | Export-Excel -Path $excelsrcfile -WorksheetName $excelTableName -Title $Title -ConditionalText $ConditionalText -PivotTableDefinition $PivotTableDef -AutoSize -AutoFilter -Show
+						$data | Export-Excel -Path $excelsrcfile -WorksheetName $excelTableName -Title $Title -ConditionalText $ConditionalText -PivotTableDefinition $PivotTableDef -NoNumberConversion -AutoSize -AutoFilter -Show
 					}
 					else {
 						Write-Warning "No CVEs on $($Date.ToString("yyyy-MMM")) and for $ProductType were found!"
