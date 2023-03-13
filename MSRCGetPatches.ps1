@@ -185,21 +185,21 @@ Function Get-ActualCVEsByProduct {
 					'Severity'      = $_.Severity
 					'Impact'        = $_.Impact
 					'FixedBuild'    = ($_.FixedBuild | ForEach-Object {
-										$arr=@(); 
-										if ($_ -ne '') { 
-											[array]$arr += $_;
-											$arr -join ',';
-										}
-									}) -join ','
+							$arr = @(); 
+							if ($_ -ne '') { 
+								[array]$arr += $_;
+								$arr -join ',';
+							}
+						}) -join ','
 					'KB-ID'         = (($_.KBArticle).ID | ForEach-Object {  
-										$arr=@();
-										if ($_ -ne '') { 
-											[array]$arr += 'KB'+$_;
-											$arr -join ',';
-										}
-									}) -join ','
-					'KBType'        = @($_.KBArticle).SubType  -join ','
-					'KBDownloadUrl' = @($_.KBArticle).Url  -join ','
+							$arr = @();
+							if ($_ -ne '') { 
+								[array]$arr += 'KB' + $_;
+								$arr -join ',';
+							}
+						}) -join ','
+					'KBType'        = @($_.KBArticle).SubType -join ','
+					'KBDownloadUrl' = @($_.KBArticle).Url -join ','
 				}
 				$ProductNameArray += $ProductObj
 			}
@@ -236,7 +236,7 @@ Function Get-ActualCVEsByProduct {
 					if ($ProductNameArray) {
 						
 						$excelsrcfile = "$env:USERPROFILE\Desktop\CVEs.xlsx"
-						if(Test-Path $excelsrcfile -PathType Leaf) {
+						if (Test-Path $excelsrcfile -PathType Leaf) {
 							Remove-Item -Path $excelsrcfile -Force
 						}
 						$excelTableName = "CVEs_$($Date.ToString("MMM_yyyy"))" 
@@ -246,8 +246,8 @@ Function Get-ActualCVEsByProduct {
 						$ConditionalText3 = New-ConditionalText -Text 'Moderate' -BackgroundColor Yellow
 						$ConditionalText4 = New-ConditionalText -Text 'Low' -BackgroundColor LightBlue
 						$pivot = @{Show = $false; AutoSize = $true; AutoFilter = $true; IncludePivotTable = $true; ConditionalText = @($ConditionalText1, $ConditionalText2, $ConditionalText3, $ConditionalText4) }
-						$pivot.PivotRows = 'Severity', 'CVE-Title', 'CVE'
-						$pivot.PivotColumns = 'KB-ID'
+						$pivot.PivotRows = 'Severity', 'CVE-Title', 'CVE', 'KBType', 'KB-ID'
+						$pivot.PivotColumns = 'ProductName'
 						$pivot.PivotData = "Impact"
 						$data | Export-Excel -Path $excelsrcfile -TableName $excelTableName -Title $Title -PivotChartType PieExploded3D -ShowPercent @pivot
 					}
@@ -275,5 +275,5 @@ Function Get-ActualCVEsByProduct {
 ### Sample calls
 #Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016*" -OutputStyle HTML -Date "01.2021"
 #Get-ActualCVEsByProduct -ProductTitle "Microsoft SQL Server 2016*" -OutputStyle Excel -Date 06.2022
-#Get-ActualCVEsByProduct -ProductTitle "Windows Server 2019" -OutputStyle Console
+Get-ActualCVEsByProduct -ProductTitle "Windows Server 2022" -OutputStyle GridView
 #get-ActualCVEsByProduct -ProductTitle "Windows 8.1*" -OutputStyle GridView -Date 01.2023
