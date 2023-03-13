@@ -249,7 +249,7 @@ Function Get-ActualCVEsByProduct {
 						$pivot.PivotRows = 'Severity', 'Impact', 'CVE-Title', 'CVE', 'KBType', 'KB-ID'
 						$pivot.PivotColumns = 'ProductName'
 						$pivot.PivotData = "Severity"
-						$data | Export-Excel -Path $excelsrcfile -TableName $excelTableName -Title $Title -PivotChartType ColumnClustered -AutoNameRange @pivot 
+						$data | Export-Excel -Path $excelsrcfile -TableName $excelTableName -Title $Title -PivotChartType BarClustered -AutoNameRange @pivot 
 					}
 					else {
 						Write-Warning "No CVEs on $($Date.ToString("yyyy-MMM")) and for $ProductType were found!"
@@ -275,5 +275,5 @@ Function Get-ActualCVEsByProduct {
 ### Sample calls
 #Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016*" -OutputStyle HTML -Date "01.2021"
 #Get-ActualCVEsByProduct -ProductTitle "Microsoft SQL Server 2016*" -OutputStyle Excel -Date 06.2022
-Get-ActualCVEsByProduct -ProductTitle "Windows Server 2022" -OutputStyle GridView
+#Get-ActualCVEsByProduct -ProductTitle "Windows Server 2022" -OutputStyle GridView
 #get-ActualCVEsByProduct -ProductTitle "Windows 8.1*" -OutputStyle GridView -Date 01.2023
