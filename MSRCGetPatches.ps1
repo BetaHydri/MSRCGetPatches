@@ -180,7 +180,7 @@ Function Get-ActualCVEsByProduct {
 			
 				$ProductObj = [PSCustomObject][Ordered]@{
 					'CVE'           = $_.CVE
-					'CVE-Title'     = ((Get-MsrcCveTitle -Vulnerability $ID.Vulnerability -ProductTree $id.ProductTree -ProductFilter $ProductType -CVEFilter $($_.CVE)).CVETitle -split ',')[0]
+					'CVE_Title'     = ((Get-MsrcCveTitle -Vulnerability $ID.Vulnerability -ProductTree $id.ProductTree -ProductFilter $ProductType -CVEFilter $($_.CVE)).CVETitle -split ',')[0]
 					'ProductName'   = $_.FullProductName
 					'Severity'      = $_.Severity
 					'Impact'        = $_.Impact
@@ -191,7 +191,7 @@ Function Get-ActualCVEsByProduct {
 								$arr -join ',';
 							}
 						}) -join ','
-					'KB-ID'         = (($_.KBArticle).ID | ForEach-Object {  
+					'KB_ID'         = (($_.KBArticle).ID | ForEach-Object {  
 							$arr = @();
 							if ($_ -ne '') { 
 								[array]$arr += 'KB' + $_;
@@ -245,11 +245,9 @@ Function Get-ActualCVEsByProduct {
 						$ConditionalText2 = New-ConditionalText -Text 'Important' -BackgroundColor Orange
 						$ConditionalText3 = New-ConditionalText -Text 'Moderate' -BackgroundColor Yellow
 						$ConditionalText4 = New-ConditionalText -Text 'Low' -BackgroundColor LightBlue
-						$pivot = @{Show = $true; AutoSize = $true; AutoFilter = $true; IncludePivotTable = $true; ConditionalText = @($ConditionalText1, $ConditionalText2, $ConditionalText3, $ConditionalText4) }
-						$pivot.PivotRows = 'Severity', 'Impact', 'CVE-Title', 'CVE', 'KBType', 'KB-ID'
-						$pivot.PivotColumns = 'ProductName'
-						$pivot.PivotData = "Severity"
-						$data | Export-Excel -Path $excelsrcfile -TableName $excelTableName -Title $Title -PivotChartType BarClustered -AutoNameRange @pivot 
+						$ConditionalText = @($ConditionalText1, $ConditionalText2, $ConditionalText3, $ConditionalText4)
+						$PivotTableDef = New-PivotTableDefinition -PivotTableName "Pivot_$excelTableName" -PivotRows 'Severity', 'Impact', 'CVE_Title', 'CVE', 'KBType', 'KB_ID' -PivotColumns 'ProductName' -PivotData @{Severity = 'Count' } -PivotTableStyle Medium8 -Activate -ChartType BarClustered -ChartTitle $($excelTableName.Replace('_', ' ')) -ChartHeight 650 -ChartWidth 1200
+						$data | Export-Excel -Path $excelsrcfile -WorksheetName $excelTableName -Title $Title -ConditionalText $ConditionalText -PivotTableDefinition $PivotTableDef -AutoSize -AutoFilter -Show
 					}
 					else {
 						Write-Warning "No CVEs on $($Date.ToString("yyyy-MMM")) and for $ProductType were found!"
