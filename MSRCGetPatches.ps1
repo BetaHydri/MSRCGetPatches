@@ -190,16 +190,16 @@ Function Get-ActualCVEsByProduct {
 								[array]$arr += $_;
 								$arr -join ',';
 							}
-						}) -join ','
+						} | Get-Unique -AsString) -join ',' 
 					'KB_ID'         = (($_.KBArticle).ID | ForEach-Object {  
 							$arr = @();
 							if ($_ -ne '') { 
 								[array]$arr += 'KB' + $_;
 								$arr -join ',';
 							}
-						}) -join ','
-					'KBType'        = @($_.KBArticle).SubType -join ','
-					'KBDownloadUrl' = @($_.KBArticle).Url -join ','
+						}| Get-Unique -AsString) -join ',' 
+					'KBType'        = (@($_.KBArticle).SubType | Get-Unique -AsString) -join ',' 
+					'KBDownloadUrl' = (@($_.KBArticle).Url | Get-Unique -AsString) -join ',' 
 				}
 				$ProductNameArray += $ProductObj
 			}
@@ -273,5 +273,5 @@ Function Get-ActualCVEsByProduct {
 ### Sample calls
 #Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016*" -OutputStyle HTML -Date "01.2021"
 #Get-ActualCVEsByProduct -ProductTitle "Microsoft SQL Server 2016*" -OutputStyle Excel -Date 06.2022
-#Get-ActualCVEsByProduct -ProductTitle "Windows Server 2022" -OutputStyle GridView
+#Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016" -OutputStyle Console -Date 03.2023
 #get-ActualCVEsByProduct -ProductTitle "Windows 8.1*" -OutputStyle GridView -Date 01.2023
