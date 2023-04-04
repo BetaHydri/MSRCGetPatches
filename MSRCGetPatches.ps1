@@ -1,4 +1,3 @@
-
 Function Get-MsrcCveTitle {
 	<#
 		.SYNOPSIS
@@ -195,11 +194,23 @@ Function Get-ActualCVEsByProduct {
 							$arr = @();
 							if ($_ -ne '') { 
 								[array]$arr += 'KB' + $_;
-								$arr -join ',';
+								($arr) -join ',';
 							}
-						}| Get-Unique -AsString) -join ',' 
-					'KBType'        = (@($_.KBArticle).SubType | Get-Unique -AsString) -join ',' 
-					'KBDownloadUrl' = (@($_.KBArticle).Url | Get-Unique -AsString) -join ',' 
+						} | Get-Unique -AsString) -join ',' 
+					'KBType'        = (@($_.KBArticle).SubType | ForEach-Object {  
+							$arr = @();
+							if ($_ -ne '') { 
+								[array]$arr += $_;
+								($arr) -join ',';
+							}
+						} | Get-Unique -AsString) -join ',' 
+					'KBDownloadUrl' = (@($_.KBArticle).Url  | ForEach-Object {  
+							$arr = @();
+							if ($_ -ne '') { 
+								[array]$arr += $_;
+								($arr) -join ',';
+							}
+						} | Get-Unique -AsString) -join ',' 
 				}
 				$ProductNameArray += $ProductObj
 			}
@@ -273,5 +284,5 @@ Function Get-ActualCVEsByProduct {
 ### Sample calls
 #Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016*" -OutputStyle HTML -Date "01.2021"
 #Get-ActualCVEsByProduct -ProductTitle "Microsoft SQL Server 2016*" -OutputStyle Excel -Date 06.2022
-#Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016" -OutputStyle Console -Date 03.2023
+Get-ActualCVEsByProduct -ProductTitle "*Sharepoint*" -OutputStyle Console -Date 03.2023
 #get-ActualCVEsByProduct -ProductTitle "Windows 8.1*" -OutputStyle GridView -Date 01.2023
