@@ -190,27 +190,9 @@ Function Get-ActualCVEsByProduct {
 								$arr -join ',';
 							}
 						} | Get-Unique -AsString) -join ',' 
-					'KB_ID'         = (($_.KBArticle).ID | ForEach-Object {  
-							$arr = @();
-							if ($_ -ne '') { 
-								[array]$arr += 'KB' + $_;
-								($arr) -join ',';
-							}
-						} | Get-Unique -AsString) -join ',' 
-					'KBType'        = (@($_.KBArticle).SubType | ForEach-Object {  
-							$arr = @();
-							if ($_ -ne '') { 
-								[array]$arr += $_;
-								($arr) -join ',';
-							}
-						} | Get-Unique -AsString) -join ',' 
-					'KBDownloadUrl' = (@($_.KBArticle).Url  | ForEach-Object {  
-							$arr = @();
-							if ($_ -ne '') { 
-								[array]$arr += $_;
-								($arr) -join ',';
-							}
-						} | Get-Unique -AsString) -join ',' 
+					'KB_ID'         = (@(($_.KBArticle).id | Select-Object -Unique) -join ',')
+					'KBType'        = (@(($_.KBArticle).SubType | Select-Object -Unique) -join ",") 
+					'KBDownloadUrl' = (@(($_.KBArticle).Url  | Select-Object -Unique) -join ',')
 				}
 				$ProductNameArray += $ProductObj
 			}
