@@ -266,5 +266,5 @@ Function Get-ActualCVEsByProduct {
 ### Sample calls
 #Get-ActualCVEsByProduct -ProductTitle "Windows Server 2016*" -OutputStyle HTML -Date "01.2021"
 #Get-ActualCVEsByProduct -ProductTitle "Microsoft SQL Server 2016*" -OutputStyle Excel -Date 06.2022
-Get-ActualCVEsByProduct -ProductTitle "*Sharepoint*" -OutputStyle Console -Date 03.2023
+#Get-ActualCVEsByProduct -ProductTitle "*Sharepoint*" -OutputStyle Console -Date 03.2023
 #get-ActualCVEsByProduct -ProductTitle "Windows 8.1*" -OutputStyle GridView -Date 01.2023
