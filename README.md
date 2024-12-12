@@ -1,13 +1,9 @@
 # Get-ActualCVEsByProduct 
 Enumerates all CVEs for a specified product for a specified year-month combination.<br />
-Needed PoSh module ***MsrcSecurityUpdates*** will be downloaded and imported.
+Needed PoSh module [***msrcSecurityUpdates***](https://github.com/microsoft/MSRC-Microsoft-Security-Updates-API) and [***ImportExcel***](https://github.com/dfinke/ImportExcel) will be downloaded and imported automatically.
 
-## How to use
-### Dot-sourcing function Get-ActualCVEsByProduct from .ps1 file MSRCGetPatches.ps1
-1. `PS C:\Develop\PowerShell\Security\MSRCGetPatches> . .\MSRCGetPatches.ps1`
-2. `PS C:\Develop\PowerShell\Security\MSRCGetPatches> Get-ActualCVEsByProduct -ProductTitle "Windows*" -OutputStyle GridView -Date 08.2023`
-
-### Parameters of function Get-ActualCVEsByProduct
+After download import module as follows:  
+`Import-Module .\MSRCGetPatches\MSRCGetPatches.ps1`
 
 PARAMETER ***ProductTitle*** (mandatory) <br />
 * `"Windows Server 2016*"` <br />
